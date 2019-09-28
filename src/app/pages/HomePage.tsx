@@ -11,6 +11,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FilterList from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
+import SiteSummary from 'app/components/SiteSummary/SiteSummary';
+
 const useStyles = makeStyles({
   pageHeader: {
     boxShadow: 'none'
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
     justifyContent: 'center'
   },
   sitesController: {
-    padding: '6px 24px',
+    padding: '0 24px',
     borderBottom: '1px solid #999'
   },
   sitesControllerTitle: {
@@ -86,7 +88,9 @@ export default function HomePage(): ReactElement {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        todo rows~
+        <Grid container>
+          <SiteSummary />
+        </Grid>
       </Grid>
     </Grid>
   );
