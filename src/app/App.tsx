@@ -4,13 +4,15 @@ import { Grid } from '@material-ui/core';
 import AppHeader from 'app/components/AppHeader/AppHeader';
 import HomePage from 'app/pages/HomePage';
 
+interface IProps {}
+
 interface IState {
   selectedSite: null;
 }
 
-export default class App extends React.Component<{}, IState> {
-  constructor() {
-    super({});
+export default class App extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
 
     this.state = {
       selectedSite: null
@@ -27,7 +29,7 @@ export default class App extends React.Component<{}, IState> {
           {
             this.state.selectedSite
             ?
-              <></>
+              <>nope</>
             :
               <HomePage />
           }
