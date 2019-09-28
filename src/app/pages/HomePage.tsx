@@ -12,6 +12,7 @@ import FilterList from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
 import SiteSummary from 'app/components/SiteSummary/SiteSummary';
+import { ISite } from 'app/models/site';
 
 const useStyles = makeStyles({
   pageHeader: {
@@ -49,8 +50,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function HomePage(): ReactElement {
+interface IProps {
+  sites: ISite[];
+}
+
+export default function HomePage(props: IProps): ReactElement {
   const classes = useStyles();
+
+  const renderSiteSummaries = (): ReactElement[] => {
+    const siteSummaries: ReactElement[] = [];
+
+    props.sites.forEach((site: ISite, i: number): void => {
+      siteSummaries.push(<SiteSummary key={i} site={site} />);
+    });
+
+    return siteSummaries;
+  };
 
   return (
     <Grid container>
@@ -89,7 +104,7 @@ export default function HomePage(): ReactElement {
       </Grid>
       <Grid item xs={12}>
         <Grid container>
-          <SiteSummary />
+          {renderSiteSummaries()}
         </Grid>
       </Grid>
     </Grid>
