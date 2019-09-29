@@ -7,6 +7,7 @@ import {
   Toolbar,
   Typography
 } from '@material-ui/core';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FilterList from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
@@ -59,7 +60,8 @@ const styles = (): any => ({
   showMoreButton: {
     width: '100%',
     height: '100%',
-    fontSize: '16px'
+    fontSize: '16px',
+    backgroundColor: '#ddd'
   }
 });
 
@@ -69,11 +71,26 @@ interface IProps {
   onShowMoreClick: () => Promise<void>;
 }
 
-class HomePage extends React.Component<IProps> {
+interface IState {
+  showSites: boolean;
+}
+
+class HomePage extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
+    this.state = {
+      showSites: true
+    };
+
+    this.handleExpandArrowClick = this.handleExpandArrowClick.bind(this);
     this.renderSiteSummaries = this.renderSiteSummaries.bind(this);
+  }
+
+  handleExpandArrowClick(): void {
+    this.setState({
+      showSites: !this.state.showSites
+    });
   }
 
   renderSiteSummaries(): ReactElement[] {
@@ -110,8 +127,17 @@ class HomePage extends React.Component<IProps> {
               </Typography>
             </Grid>
             <Grid className={classes.sitesControllerCollapseArrow} item xs={2}>
-              <IconButton className={classes.sitesControllerIconButton}>
-                <ExpandMoreIcon />
+              <IconButton 
+                className={classes.sitesControllerIconButton}
+                onClick={this.handleExpandArrowClick}
+              >
+                {
+                  this.state.showSites
+                  ?
+                    <ExpandLessIcon />
+                  :
+                    <ExpandMoreIcon />
+                }
               </IconButton>
             </Grid>
             <Grid className={classes.sitesControllerActions} item xs={5}>
@@ -124,19 +150,27 @@ class HomePage extends React.Component<IProps> {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Grid container>
-            {this.renderSiteSummaries()}
-          </Grid>
-        </Grid>
-        <Grid className={classes.showMoreButtonContainer} item xs={12}>
-          <Button
-            className={classes.showMoreButton}
-            onClick={this.props.onShowMoreClick}
-          >
-            Show More
-          </Button>
-        </Grid>
+        {
+          this.state.showSites
+          ?
+            <>
+              <Grid item xs={12}>
+                <Grid container>
+                  {this.renderSiteSummaries()}
+                </Grid>
+              </Grid>
+              <Grid className={classes.showMoreButtonContainer} item xs={12}>
+                <Button
+                  className={classes.showMoreButton}
+                  onClick={this.props.onShowMoreClick}
+                >
+                  Show More
+                </Button>
+            </Grid>
+           </>
+          :
+            null
+        }
       </Grid>
     );
   } 
