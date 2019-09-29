@@ -7,15 +7,16 @@ import {
   Toolbar,
   Typography
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FilterList from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
+import { withStyles } from '@material-ui/styles';
 
 import SiteSummary from 'app/components/SiteSummary/SiteSummary';
 import { ISite } from 'app/models/site';
 
-const useStyles = makeStyles({
+// This shouldn't be type 'any' but I can't figure out how to import StylesType :/
+const styles = (): any => ({
   pageHeader: {
     boxShadow: 'none'
   },
@@ -63,71 +64,82 @@ const useStyles = makeStyles({
 });
 
 interface IProps {
+  classes: any;
   sites: ISite[];
   onShowMoreClick: () => Promise<void>;
 }
 
-export default function HomePage(props: IProps): ReactElement {
-  const classes = useStyles();
+class HomePage extends React.Component<IProps> {
+  constructor(props: IProps) {
+    super(props);
 
-  const renderSiteSummaries = (): ReactElement[] => {
+    this.renderSiteSummaries = this.renderSiteSummaries.bind(this);
+  }
+
+  renderSiteSummaries(): ReactElement[] {
     const siteSummaries: ReactElement[] = [];
 
-    props.sites.forEach((site: ISite, i: number): void => {
+    this.props.sites.forEach((site: ISite, i: number): void => {
       siteSummaries.push(<SiteSummary key={i} site={site} />);
     });
 
     return siteSummaries;
-  };
+  }
 
-  return (
-    <Grid container>
-      <Grid item xs={12}>
-        <AppBar className={classes.pageHeader} position="static">
-          <Toolbar>
-            <div className={classes.pageHeaderContent}>
-              <Typography variant="h6">
-                Sites
+  render(): ReactElement {
+    const { classes } = this.props;
+
+    return (
+      <Grid container>
+        <Grid item xs={12}>
+          <AppBar className={classes.pageHeader} position="static">
+            <Toolbar>
+              <div className={classes.pageHeaderContent}>
+                <Typography variant="h6">
+                  Sites
+                </Typography>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </Grid>
+        <Grid item xs={12}>
+          <Grid className={classes.sitesController} container>
+            <Grid className={classes.sitesControllerTitle} item xs={5}>
+              <Typography className={classes.sitesControllerTitleText} variant="subtitle1">
+                All Sites
               </Typography>
-            </div>
-          </Toolbar>
-        </AppBar>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid className={classes.sitesController} container>
-          <Grid className={classes.sitesControllerTitle} item xs={5}>
-            <Typography className={classes.sitesControllerTitleText} variant="subtitle1">
-              All Sites
-            </Typography>
-          </Grid>
-          <Grid className={classes.sitesControllerCollapseArrow} item xs={2}>
-            <IconButton className={classes.sitesControllerIconButton}>
-              <ExpandMoreIcon />
-            </IconButton>
-          </Grid>
-          <Grid className={classes.sitesControllerActions} item xs={5}>
-            <IconButton className={classes.sitesControllerIconButton}>
-              <FilterList />
-            </IconButton>
-            <IconButton className={classes.sitesControllerIconButton}>
-              <SearchIcon />
-            </IconButton>
+            </Grid>
+            <Grid className={classes.sitesControllerCollapseArrow} item xs={2}>
+              <IconButton className={classes.sitesControllerIconButton}>
+                <ExpandMoreIcon />
+              </IconButton>
+            </Grid>
+            <Grid className={classes.sitesControllerActions} item xs={5}>
+              <IconButton className={classes.sitesControllerIconButton}>
+                <FilterList />
+              </IconButton>
+              <IconButton className={classes.sitesControllerIconButton}>
+                <SearchIcon />
+              </IconButton>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid container>
-          {renderSiteSummaries()}
+        <Grid item xs={12}>
+          <Grid container>
+            {this.renderSiteSummaries()}
+          </Grid>
+        </Grid>
+        <Grid className={classes.showMoreButtonContainer} item xs={12}>
+          <Button
+            className={classes.showMoreButton}
+            onClick={this.props.onShowMoreClick}
+          >
+            Show More
+          </Button>
         </Grid>
       </Grid>
-      <Grid className={classes.showMoreButtonContainer} item xs={12}>
-        <Button
-          className={classes.showMoreButton}
-          onClick={props.onShowMoreClick}
-        >
-          Show More
-        </Button>
-      </Grid>
-    </Grid>
-  );
+    );
+  } 
 }
+
+export default withStyles(styles)(HomePage);
