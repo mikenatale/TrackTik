@@ -27,6 +27,7 @@ export default class App extends React.Component<IProps, IState> {
       sites: []
     };
 
+    this.handleBackClick = this.handleBackClick.bind(this);
     this.handleShowMoreClick = this.handleShowMoreClick.bind(this);
     this.handleSiteClick = this.handleSiteClick.bind(this);
   }
@@ -40,6 +41,18 @@ export default class App extends React.Component<IProps, IState> {
     });
   }
 
+  handleBackClick(): void {
+    this.setState({
+      selectedSite: null
+    });
+  }
+
+  handleSiteClick(site: ISite): void {
+    this.setState({
+      selectedSite: site
+    });
+  }
+
   async handleShowMoreClick(): Promise<void> {
     const currentPage = this.state.currentPage + 1;
     const sites = await get(`sites?_page=${currentPage}`) as ISite[];
@@ -47,12 +60,6 @@ export default class App extends React.Component<IProps, IState> {
     this.setState({
       currentPage,
       sites: [...this.state.sites, ...sites]
-    });
-  }
-
-  handleSiteClick(site: ISite): void {
-    this.setState({
-      selectedSite: site
     });
   }
 
@@ -71,7 +78,10 @@ export default class App extends React.Component<IProps, IState> {
             // this.state.selectedSite
             this.state.sites.length
             ?
-              <SiteDetailsPage site={this.state.sites[0]} />
+              <SiteDetailsPage
+                site={this.state.sites[0]}
+                onBackClick={this.handleBackClick}
+              />
             :
               <HomePage
                 sites={this.state.sites}
