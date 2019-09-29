@@ -67,18 +67,18 @@ export default class App extends React.Component<IProps, IState> {
           <AppHeader />
         </Grid>
         <Grid item xs={12}>
-          <SiteDetailsPage />
-          {/* {
-            this.state.selectedSite
+          {
+            // this.state.selectedSite
+            this.state.sites.length
             ?
-              <SiteDetailsPage site={this.state.selectedSite} />
+              <SiteDetailsPage site={this.state.sites[0]} />
             :
               <HomePage
                 sites={this.state.sites}
                 onShowMoreClick={this.handleShowMoreClick}
                 onSiteClick={this.handleSiteClick}
               />
-          } */}
+          }
         </Grid>
       </Grid>
     );

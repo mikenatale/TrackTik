@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import SiteSummary from 'app/components/SiteSummary';
 import { ISite } from 'app/models/site';
-import SiteSummary from 'app/pages/SiteDetailsPage';
 
 const useStyles = makeStyles({
   root: {
