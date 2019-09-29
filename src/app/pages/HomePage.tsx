@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import {
   AppBar,
+  Button,
   Grid,
   IconButton,
   Toolbar,
@@ -48,10 +49,22 @@ const useStyles = makeStyles({
   sitesControllerIconButton: {
     padding: '4px'
   },
+  showMoreButtonContainer: {
+    height: '96px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  showMoreButton: {
+    width: '100%',
+    height: '100%',
+    fontSize: '16px'
+  }
 });
 
 interface IProps {
   sites: ISite[];
+  onShowMoreClick: () => Promise<void>;
 }
 
 export default function HomePage(props: IProps): ReactElement {
@@ -106,6 +119,14 @@ export default function HomePage(props: IProps): ReactElement {
         <Grid container>
           {renderSiteSummaries()}
         </Grid>
+      </Grid>
+      <Grid className={classes.showMoreButtonContainer} item xs={12}>
+        <Button
+          className={classes.showMoreButton}
+          onClick={props.onShowMoreClick}
+        >
+          Show More
+        </Button>
       </Grid>
     </Grid>
   );

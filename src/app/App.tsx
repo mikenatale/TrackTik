@@ -9,6 +9,7 @@ import HomePage from 'app/pages/HomePage';
 interface IProps {}
 
 interface IState {
+  currentPage: number;
   isLoading: boolean;
   selectedSite: null;
   sites: ISite[];
@@ -19,21 +20,32 @@ export default class App extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
+      currentPage: 1,
       isLoading: true,
       selectedSite: null,
       sites: []
     };
+
+    this.handleShowMoreClick = this.handleShowMoreClick.bind(this);
   }
 
   async componentDidMount(): Promise<void> {
-    const sites = await get('sites') as ISite[];
-
-    console.log(sites[0]);
+    const sites = await get(`sites?_page=${this.state.currentPage}`) as ISite[];
 
     this.setState({
       isLoading: false,
       sites
     })
+  }
+
+  async handleShowMoreClick(): Promise<void> {
+    const currentPage = this.state.currentPage + 1;
+    const sites = await get(`sites?_page=${currentPage}`) as ISite[];
+
+    this.setState({
+      currentPage,
+      sites: [...this.state.sites, ...sites]
+    });
   }
 
   render(): ReactElement {
@@ -52,7 +64,7 @@ export default class App extends React.Component<IProps, IState> {
             ?
               <>nope</>
             :
-              <HomePage sites={this.state.sites} />
+              <HomePage sites={this.state.sites} onShowMoreClick={this.handleShowMoreClick} />
           }
         </Grid>
       </Grid>

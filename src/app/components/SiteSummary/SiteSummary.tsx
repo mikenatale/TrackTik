@@ -4,7 +4,6 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import clsx from 'clsx';
 
 import { ISite } from 'app/models/site';
 
