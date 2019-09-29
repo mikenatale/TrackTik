@@ -24,6 +24,16 @@ const useStyles = makeStyles({
   },
   backIcon: {
     color: '#fff'
+  },
+  imageContainer: {
+    width: '100%',
+    height: '25vh'
+  },
+  image: {
+    width: '100%',
+    height: '288px',
+    backgroundSize: 'cover',
+    backgroundPosition: '0 50%'
   }
 });
 
@@ -50,6 +60,9 @@ export default function SiteDetailsPage(props: IProps): ReactElement {
             <SiteSummary site={props.site} />
           </Toolbar>
         </AppBar>
+      </Grid>
+      <Grid className={classes.imageContainer} item xs={12}>
+        <div className={classes.image} style={{backgroundImage: `url("${props.site.images[0]}")`}}></div>
       </Grid>
     </Grid>
   );
