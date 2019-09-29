@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hello! I figured I'd use this space to justify some of the technical decision I made and stuff like that.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## First off, how to run the App
 
-### `npm start`
+```
+npm i
+npm start
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+That's it! I used a local tunnel to test on my phone (I recommend `serveo.net`!)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+Gonna break this down one by one:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### React
 
-### `npm run build`
+I know you guys use Vue over there and I'm not worried about learning it, but learning it on the fly would have been bold move :p
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I used regular components for anything with a state, and stateless components for the "dumb" ones that only had to deal with inputs and outputs for optimization. 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+#### Material UI
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The basic design and icons looked VERY Material-ish, so I decided to roll with that. I figured it was important to show that I'm able to use existing components rather than make everything custom.
 
-### `npm run eject`
+I also had to do some funky CSS injection as a result; I know it makes the files ugly and I'd usually prefer dedicated `.scss` files myself, but that's how the framework works ¯\\\_(ツ)_/¯
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Typescript
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Possibly a bit overkill, but many big projects use Typescript and the spec said that this should be something that could be built upon. I figured it's way easier to include it from the get-go rather than trying to add it in after the fact.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Other things I wanted to acknowledge
 
-## Learn More
+* Some (most) of the buttons don't do anything, they're just there to match the design.
+* I kind of cheated and used `div`s with `cursor: pointer` for clickable elements, which that doesn't take accessibility into account. Given more time I'd rework that.
+* I could made every component stateless and used hooks to manage those, but from what I understand there's no common consensus on which one is * actually better.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I appreciate your time and thanks for coming to my TED Talk
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+<sup>hire me pls</sup>
