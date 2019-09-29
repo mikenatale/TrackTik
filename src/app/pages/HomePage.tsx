@@ -69,6 +69,7 @@ interface IProps {
   classes: any;
   sites: ISite[];
   onShowMoreClick: () => Promise<void>;
+  onSiteClick: (site: ISite) => void;
 }
 
 interface IState {
@@ -97,7 +98,7 @@ class HomePage extends React.Component<IProps, IState> {
     const siteSummaries: ReactElement[] = [];
 
     this.props.sites.forEach((site: ISite, i: number): void => {
-      siteSummaries.push(<SiteSummary key={i} site={site} />);
+      siteSummaries.push(<SiteSummary key={i} site={site} onClick={this.props.onSiteClick} />);
     });
 
     return siteSummaries;

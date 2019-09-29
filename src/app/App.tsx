@@ -5,13 +5,14 @@ import AppHeader from 'app/components/AppHeader';
 import { get } from 'app/helpers/api';
 import { ISite } from 'app/models/site';
 import HomePage from 'app/pages/HomePage';
+import SiteDetailsPage from 'app/pages/SiteDetailsPage';
 
 interface IProps {}
 
 interface IState {
   currentPage: number;
   isLoading: boolean;
-  selectedSite: null;
+  selectedSite: ISite | null;
   sites: ISite[];
 }
 
@@ -27,6 +28,7 @@ export default class App extends React.Component<IProps, IState> {
     };
 
     this.handleShowMoreClick = this.handleShowMoreClick.bind(this);
+    this.handleSiteClick = this.handleSiteClick.bind(this);
   }
 
   async componentDidMount(): Promise<void> {
@@ -35,7 +37,7 @@ export default class App extends React.Component<IProps, IState> {
     this.setState({
       isLoading: false,
       sites
-    })
+    });
   }
 
   async handleShowMoreClick(): Promise<void> {
@@ -45,6 +47,12 @@ export default class App extends React.Component<IProps, IState> {
     this.setState({
       currentPage,
       sites: [...this.state.sites, ...sites]
+    });
+  }
+
+  handleSiteClick(site: ISite): void {
+    this.setState({
+      selectedSite: site
     });
   }
 
@@ -62,9 +70,13 @@ export default class App extends React.Component<IProps, IState> {
           {
             this.state.selectedSite
             ?
-              <>nope</>
+              <SiteDetailsPage site={this.state.selectedSite} />
             :
-              <HomePage sites={this.state.sites} onShowMoreClick={this.handleShowMoreClick} />
+              <HomePage
+                sites={this.state.sites}
+                onShowMoreClick={this.handleShowMoreClick}
+                onSiteClick={this.handleSiteClick}
+              />
           }
         </Grid>
       </Grid>

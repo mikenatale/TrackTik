@@ -47,13 +47,19 @@ const useStyles = makeStyles({
 
 interface IProps {
   site: ISite;
+  onClick: (site: ISite) => void;
 }
 
 export default function SiteSummary(props: IProps): ReactElement {
     const classes = useStyles();
 
     return (
-      <Grid className={classes.root} item xs={12}>
+      <Grid
+        className={classes.root}
+        item
+        xs={12}
+        onClick={() => { props.onClick(props.site) }}
+      >
         <Grid className={classes.container} container>
           <Grid className={classes.info} item xs={11}>
             <div className={classes.image}>
