@@ -13,7 +13,7 @@ import FilterList from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/styles';
 
-import SiteSummary from 'app/components/SiteSummary/SiteSummary';
+import SiteSummary from 'app/components/SiteSummary';
 import { ISite } from 'app/models/site';
 
 // This shouldn't be type 'any' but I can't figure out how to import StylesType :/

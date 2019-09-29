@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Grid } from '@material-ui/core';
 
-import AppHeader from 'app/components/AppHeader/AppHeader';
+import AppHeader from 'app/components/AppHeader';
 import { get } from 'app/helpers/api';
 import { ISite } from 'app/models/site';
 import HomePage from 'app/pages/HomePage';
