@@ -13,7 +13,7 @@ import FilterList from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/styles';
 
-import SiteSummary from 'app/components/SiteSummary';
+import SiteSearchResult from 'app/components/SiteSearchResult';
 import { ISite } from 'app/models/site';
 
 // This shouldn't be type 'any' but I can't figure out how to import StylesType :/
@@ -98,7 +98,7 @@ class HomePage extends React.Component<IProps, IState> {
     const siteSummaries: ReactElement[] = [];
 
     this.props.sites.forEach((site: ISite, i: number): void => {
-      siteSummaries.push(<SiteSummary key={i} site={site} onClick={this.props.onSiteClick} />);
+      siteSummaries.push(<SiteSearchResult key={i} site={site} onClick={this.props.onSiteClick} />);
     });
 
     return siteSummaries;

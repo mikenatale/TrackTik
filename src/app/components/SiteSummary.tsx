@@ -1,19 +1,11 @@
 import React, { ReactElement } from 'react';
-import {
-    Grid
-} from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRightIcon';
 
 import { ISite } from 'app/models/site';
 
 const useStyles = makeStyles({
-  root: {
-    height: '96px',
-    padding: '0 24px',
-    borderBottom: '1px solid black',
-    cursor: 'pointer'
-  },
   container: {
     height: '100%'
   },
@@ -21,7 +13,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center'
   },
-  image: {
+    image: {
     height: '73px',
     width: '73px',
     borderRadius: '50%'
@@ -36,7 +28,8 @@ const useStyles = makeStyles({
   },
   detailsAddress: {
     fontStyle: 'italic',
-    color: '#666'
+    color: '#666',
+    lineHeight: 1
   },
   button: {
     display: 'flex',
@@ -47,44 +40,36 @@ const useStyles = makeStyles({
 
 interface IProps {
   site: ISite;
-  onClick: (site: ISite) => void;
 }
 
 export default function SiteSummary(props: IProps): ReactElement {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-      <Grid
-        className={classes.root}
-        item
-        xs={12}
-        onClick={() => { props.onClick(props.site) }}
-      >
-        <Grid className={classes.container} container>
-          <Grid className={classes.info} item xs={11}>
-            <div className={classes.image}>
-              <img
-                className={classes.image}
-                src={props.site.images[0]}
-                alt="site thumbnail"
-              />
-            </div>
-            <div className={classes.details}>
-              <div className={classes.detailsTitle}>
-                {props.site.title}
-              </div>
-              <div className={classes.detailsAddress}>
-                {`${props.site.address.street}, ${props.site.address.city}, ${props.site.address.country}`}
-              </div>
-              <div>
-                {`${props.site.contacts.main.firstName} ${props.site.contacts.main.lastName}`}
-              </div>
-            </div>
-          </Grid>
-          <Grid className={classes.button} item xs={1}>
-            <KeyboardArrowRightIcon />
-          </Grid>
-        </Grid>
+  return (
+    <Grid className={classes.container} container>
+      <Grid className={classes.info} item xs={11}>
+        <div className={classes.image}>
+            <img
+            className={classes.image}
+            src={props.site.images[0]}
+            alt="site thumbnail"
+            />
+        </div>
+        <div className={classes.details}>
+            <Typography className={classes.detailsTitle} variant="body1">
+            {props.site.title}
+            </Typography>
+            <Typography className={classes.detailsAddress} variant="body1">
+            {`${props.site.address.street}, ${props.site.address.city}, ${props.site.address.country}`}
+            </Typography>
+            <Typography variant="body1">
+            {`${props.site.contacts.main.firstName} ${props.site.contacts.main.lastName}`}
+            </Typography>
+        </div>
       </Grid>
-    );
+      <Grid className={classes.button} item xs={1}>
+        <KeyboardArrowRightIcon />
+      </Grid>
+    </Grid>
+  );
 }
