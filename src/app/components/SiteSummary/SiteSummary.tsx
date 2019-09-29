@@ -18,11 +18,9 @@ const useStyles = makeStyles({
   container: {
     height: '100%'
   },
-  imageContainer: {
+  info: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    overflow: 'hidden'
+    alignItems: 'center'
   },
   image: {
     height: '73px',
@@ -32,16 +30,14 @@ const useStyles = makeStyles({
   details: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
-    padding: '12px 0'
+    marginLeft: '12px'
   },
   detailsTitle: {
     fontWeight: 'bold'
   },
-  detailsInfoLine: {
-    height: '33.3%',
-    display: 'flex',
-    alignItems: 'center'
+  detailsAddress: {
+    fontStyle: 'italic',
+    color: '#666'
   },
   button: {
     display: 'flex',
@@ -60,22 +56,24 @@ export default function SiteSummary(props: IProps): ReactElement {
     return (
       <Grid className={classes.root} item xs={12}>
         <Grid className={classes.container} container>
-          <Grid className={classes.imageContainer} item xs={2}>
-            <img
-              className={classes.image}
-              src={props.site.images[0]}
-              alt="site thumbnail"
-            />
-          </Grid>
-          <Grid className={classes.details} item xs={9}>
-            <div className={clsx(classes.detailsInfoLine, classes.detailsTitle)}>
-              {props.site.title}
+          <Grid className={classes.info} item xs={11}>
+            <div className={classes.image}>
+              <img
+                className={classes.image}
+                src={props.site.images[0]}
+                alt="site thumbnail"
+              />
             </div>
-            <div className={classes.detailsInfoLine}>
-              {`${props.site.address.street}, ${props.site.address.city}, ${props.site.address.country}`}
-            </div>
-            <div className={classes.detailsInfoLine}>
-              {`${props.site.contacts.main.firstName} ${props.site.contacts.main.lastName}`}
+            <div className={classes.details}>
+              <div className={classes.detailsTitle}>
+                {props.site.title}
+              </div>
+              <div className={classes.detailsAddress}>
+                {`${props.site.address.street}, ${props.site.address.city}, ${props.site.address.country}`}
+              </div>
+              <div>
+                {`${props.site.contacts.main.firstName} ${props.site.contacts.main.lastName}`}
+              </div>
             </div>
           </Grid>
           <Grid className={classes.button} item xs={1}>
