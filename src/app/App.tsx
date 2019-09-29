@@ -75,11 +75,10 @@ export default class App extends React.Component<IProps, IState> {
         </Grid>
         <Grid item xs={12}>
           {
-            // this.state.selectedSite
-            this.state.sites.length
+            this.state.selectedSite
             ?
               <SiteDetailsPage
-                site={this.state.sites[0]}
+                site={this.state.selectedSite}
                 onBackClick={this.handleBackClick}
               />
             :
